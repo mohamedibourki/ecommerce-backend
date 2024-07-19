@@ -6,12 +6,13 @@ import {
     getProductById,
     updateProductById
 } from '../controllers/products';
+import { authenticateToken } from '../validation/auth';
 const router = express.Router();
 
-router.post('/', createProduct);
-router.get('/', getAllProducts);
-router.get('/:id', getProductById);
-router.put('/:id', updateProductById);
-router.delete('/:id', deleteProductById);
+router.post('/', authenticateToken, createProduct);
+router.get('/', authenticateToken, getAllProducts);
+router.get('/:id', authenticateToken, getProductById);
+router.put('/:id', authenticateToken, updateProductById);
+router.delete('/:id', authenticateToken, deleteProductById);
 
 export default router;

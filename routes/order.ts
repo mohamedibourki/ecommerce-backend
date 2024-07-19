@@ -1,17 +1,18 @@
-import express from 'express';
+import express from "express";
 import {
-    createOrder,
-    deleteOrderById,
-    getAllOrders,
-    getOrderById,
-    updateOrderById
-} from '../controllers/order';
+  createOrder,
+  deleteOrderById,
+  getAllOrders,
+  getOrderById,
+  updateOrderById,
+} from "../controllers/order";
+import { authenticateToken } from "../validation/auth";
 const router = express.Router();
 
-router.post('/', createOrder);
-router.get('/', getAllOrders);
-router.get('/:id', getOrderById);
-router.put('/:id', updateOrderById);
-router.delete('/:id', deleteOrderById);
+router.post("/", authenticateToken, createOrder);
+router.get("/", authenticateToken, getAllOrders);
+router.get("/:id", authenticateToken, getOrderById);
+router.put("/:id", authenticateToken, updateOrderById);
+router.delete("/:id", authenticateToken, deleteOrderById);
 
 export default router;
